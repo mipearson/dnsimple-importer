@@ -8,6 +8,17 @@ Before you start, put your credentials in ~/.dnsimple. For example:
 To run:
 
     bundle install
-    bundle exec bin/import zonefile [zonefile zonefile ...]
+    bundle exec bin/import_zone zonefile [zonefile zonefile ...]
 
-At this moment nothing useful happens.
+Each of your zone files should be named with the domain name plus the .db or .txt extension. For example:
+
+    example.com.db
+
+When you run the importer it will create the domain in your DNSimple account if necessary. It will then import your records from the zonefiles.
+
+The zone importer handles the following record types:
+
+A, AAAA, CNAME, MX, PTR, NAPTR, SRV, TXT
+
+It will not handle URL forwarding records - you'll need to set those up by hand.
+
