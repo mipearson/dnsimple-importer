@@ -1,1 +1,8 @@
 This library provides import tools to import domains into DNSimple.
+
+To run:
+
+  bundle install
+  bundle exec bin/import zonefile [zonefile zonefile ...]
+
+At this moment nothing useful happens.
