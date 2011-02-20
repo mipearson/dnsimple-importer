@@ -4,13 +4,18 @@ GIT
   specs:
     dns-zonefile (0.5.0)
 
+GIT
+  remote: git://github.com/aetrion/dnsimple-ruby.git
+  revision: 1211626d0dfd92f6549da4870286458f2ce6a9c9
+  specs:
+    dnsimple-ruby (0.9.1)
+      httparty
+      httparty
+
 GEM
   remote: http://rubygems.org/
   specs:
     crack (0.1.8)
-    dnsimple-ruby (0.9.0)
-      httparty
-      httparty
     httparty (0.7.4)
       crack (= 0.1.8)
     polyglot (0.3.1)
@@ -22,6 +27,6 @@ PLATFORMS
 
 DEPENDENCIES
   dns-zonefile!
-  dnsimple-ruby
+  dnsimple-ruby!
   polyglot
   treetop
