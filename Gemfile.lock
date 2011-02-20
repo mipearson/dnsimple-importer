@@ -7,6 +7,12 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
+    crack (0.1.8)
+    dnsimple-ruby (0.9.0)
+      httparty
+      httparty
+    httparty (0.7.4)
+      crack (= 0.1.8)
     polyglot (0.3.1)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -16,5 +22,6 @@ PLATFORMS
 
 DEPENDENCIES
   dns-zonefile!
+  dnsimple-ruby
   polyglot
   treetop
