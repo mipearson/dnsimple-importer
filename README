@@ -1,8 +1,13 @@
 This library provides import tools to import domains into DNSimple.
 
+Before you start, put your credentials in ~/.dnsimple. For example:
+
+    username: your_username
+    password: your_password
+
 To run:
 
-  bundle install
-  bundle exec bin/import zonefile [zonefile zonefile ...]
+    bundle install
+    bundle exec bin/import zonefile [zonefile zonefile ...]
 
 At this moment nothing useful happens.

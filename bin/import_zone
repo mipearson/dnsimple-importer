@@ -6,7 +6,7 @@ require 'dnsimple/zone_importer'
 if ARGV.empty?
   puts "You must pass at least one zone file"
 else
-  importer = Dnsimple::ZoneImporter.new
+  importer = DNSimple::ZoneImporter.new
   ARGV.each do |f|
     importer.import(f)
   end

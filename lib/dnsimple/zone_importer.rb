@@ -1,13 +1,22 @@
-module Dnsimple
+require 'dns/zonefile'
+require 'dnsimple'
+DNSimple::Client.load_credentials
+
+module DNSimple
   class ZoneImporter
-    def import(f)
+    def import(f, name=nil)
       puts "importing from '#{f}'"
-      #_import_1(f)
-      import_from_string(IO.read(f))
+      name = extract_name(File.basename(f)) if name.nil?
+      import_from_string(IO.read(f), name)
     end
-    def import_from_string(s)
-      require 'dns/zonefile'
-      zone = DNS::Zonefile.load(s)
+
+    def import_from_string(s, name=nil)
+      zone = DNS::Zonefile.load(s, name)
+      puts "origin: #{name}"
+
+      domain = DNSimple::Domain.find(name)
+      puts "domain name: #{domain.name}"
+
       zone.records.each do |r|
         case r
           when DNS::A then
@@ -31,5 +40,11 @@ module Dnsimple
         end
       end
     end
+
+    def extract_name(n)
+      n = n.gsub(/\.db/, '')
+      n = n.gsub(/\.txt/, '')
+    end
+
   end
 end
