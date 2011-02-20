@@ -1,0 +1,22 @@
+GIT
+  remote: git://github.com/aeden/dns-zonefile.git
+  revision: 3360916c7796b0a42afcb4862eac064bcfa32f9c
+  specs:
+    dns-zonefile (0.5.0)
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    bind-zone-parser (0.0.3)
+    polyglot (0.3.1)
+    treetop (1.4.9)
+      polyglot (>= 0.3.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bind-zone-parser
+  dns-zonefile!
+  polyglot
+  treetop
