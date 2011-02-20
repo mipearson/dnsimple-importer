@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
 $:.unshift('lib')
-require 'dnsimple/importer'
+require 'dnsimple/zone_importer'
 
 if ARGV.empty?
   puts "You must pass at least one zone file"
 else
-  importer = Dnsimple::Importer.new
+  importer = Dnsimple::ZoneImporter.new
   ARGV.each do |f|
     importer.import(f)
   end

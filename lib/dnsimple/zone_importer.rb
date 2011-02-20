@@ -1,5 +1,5 @@
 module Dnsimple
-  class Importer
+  class ZoneImporter
     def import(f)
       puts "importing from '#{f}'"
       #_import_1(f)
@@ -12,6 +12,8 @@ module Dnsimple
         case r
           when DNS::A then
             puts "A record: #{r.host} -> #{r.address} (ttl: #{r.ttl})"
+          when DNS::AAAA then
+            puts "AAAA record: #{r.host} -> #{r.address} (ttl: #{r.ttl})"
           when DNS::CNAME then
             puts "CNAME record: #{r.host} -> #{r.domainname} (ttl: #{r.ttl})"
           when DNS::NS then
@@ -21,7 +23,11 @@ module Dnsimple
           when DNS::MX then
             puts "MX record: #{r.host} -> #{r.domainname} (prio: #{r.priority}, ttl: #{r.ttl})"
           when DNS::TXT then
-            puts "TXT records: #{r.host} -> #{r.data} (ttl: #{r.ttl})"
+            puts "TXT record: #{r.host} -> #{r.data} (ttl: #{r.ttl})"
+          when DNS::SRV then
+            puts "SRV record: #{r.host} -> #{r.domainname} (prio: #{r.priority}, weight: #{r.weight}, port: #{r.port}, ttl: #{r.ttl})"
+          when DNS::NAPTR then
+            puts "NAPTR record: #{r.host} -> #{t.data} (ttl: #{r.ttl})"
         end
       end
     end
