@@ -1,12 +1,12 @@
 GIT
   remote: git://github.com/aeden/dns-zonefile.git
-  revision: 29585a8bc1f9ac3cb298e634646bd5659a0def5c
+  revision: 038427c1ee7b27cb5af42d6956c87b739bdbfd63
   specs:
     dns-zonefile (0.5.0)
 
 GIT
   remote: git://github.com/aetrion/dnsimple-ruby.git
-  revision: 1211626d0dfd92f6549da4870286458f2ce6a9c9
+  revision: d902e05f38c0b9c5a089d8f147cf65b9d33b7d54
   specs:
     dnsimple-ruby (0.9.1)
       httparty
@@ -16,10 +16,11 @@ GEM
   remote: http://rubygems.org/
   specs:
     crack (0.1.8)
-    httparty (0.7.4)
+    httparty (0.7.8)
       crack (= 0.1.8)
-    polyglot (0.3.1)
-    treetop (1.4.9)
+    polyglot (0.3.2)
+    treetop (1.4.10)
+      polyglot
       polyglot (>= 0.3.1)
 
 PLATFORMS
