@@ -3,27 +3,30 @@ require 'dnsimple'
 DNSimple::Client.load_credentials
 
 module DNSimple
-  class ZoneImporter
-    def import(f, name=nil)
-      puts "importing from '#{f}'"
-      name = extract_name(File.basename(f)) if name.nil?
-      import_from_string(IO.read(f), name)
-    end
-
-    def import_from_string(s, name=nil)
-      zone = DNS::Zonefile.load(s, name)
-      puts "origin: #{name}"
-
-      domain = nil
-      begin
-        domain = DNSimple::Domain.find(name)
-      rescue => e
-        domain = DNSimple::Domain.create(name) 
+  module Bind
+    class ZoneImporter
+      def import(f, name=nil)
+        puts "importing from '#{f}'"
+        name = extract_name(File.basename(f)) unless name 
+        import_from_string(IO.read(f), name)
       end
-      puts "domain name: #{domain.name}"
 
-      zone.records.each do |r|
-        case r
+      def import_from_string(s, name=nil)
+        DNSimple::Domain.debug_output $stdout
+        
+        zone = DNS::Zonefile.load(s, name)
+        puts "origin: #{name}"
+
+        domain = nil
+        begin
+          domain = DNSimple::Domain.find(name)
+        rescue => e
+          domain = DNSimple::Domain.create(name) 
+        end
+        puts "domain name: #{domain.name}"
+
+        zone.records.each do |r|
+          case r
           when DNS::A then
             puts "A record: #{r.host} -> #{r.address} (ttl: #{r.ttl})"
             DNSimple::Record.create(domain.name, host_name(r.host, domain.name), 'A', r.address, :ttl => r.ttl) 
@@ -55,18 +58,19 @@ module DNSimple
           when DNS::NAPTR then
             puts "NAPTR record: #{r.host} -> #{t.data} (ttl: #{r.ttl})"
             DNSimple::Record.create(domain.name, host_name(r.host, domain.name), 'NAPTR', r.data, :ttl => r.ttl)
+          end
         end
       end
-    end
 
-    def host_name(n, d)
-      n.gsub(/\.?#{d}\.?/, '')
-    end
+      def host_name(n, d)
+        n.gsub(/\.?#{d}\.?/, '')
+      end
 
-    def extract_name(n)
-      n = n.gsub(/\.db/, '')
-      n = n.gsub(/\.txt/, '')
-    end
+      def extract_name(n)
+        n = n.gsub(/\.db/, '')
+        n = n.gsub(/\.txt/, '')
+      end
 
+    end
   end
 end

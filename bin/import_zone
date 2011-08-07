@@ -1,12 +1,32 @@
 #!/usr/bin/env ruby
 
+require 'optparse'
 $:.unshift('lib')
-require 'dnsimple/zone_importer'
+
+options = {}
+
+ARGV.options do |opt|
+  opt.on('-t', "--type=[val]", String, "The type of zone file (either bind or tinydns)", "Default: bind") do |type|
+    options[:type] = type
+  end
+end
+
+options[:type] ||= 'bind'
+
+case options[:type]
+when 'bind' then
+  require 'dnsimple/bind/zone_importer'
+  importer = DNSimple::Bind::ZoneImporter.new
+when 'tinydns' then
+  require 'dnsimple/tinydns/zone_importer'
+  importer = DNSimple::Tinydns::ZoneImporter.new
+else
+  raise "You must specify either bind or tinydns for the parser type"
+end
 
 if ARGV.empty?
   puts "You must pass at least one zone file"
 else
-  importer = DNSimple::ZoneImporter.new
   ARGV.each do |f|
     importer.import(f)
   end

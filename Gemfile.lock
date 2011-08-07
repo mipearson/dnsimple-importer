@@ -4,21 +4,25 @@ GIT
   specs:
     dns-zonefile (0.5.0)
 
-GIT
-  remote: git://github.com/aetrion/dnsimple-ruby.git
-  revision: d902e05f38c0b9c5a089d8f147cf65b9d33b7d54
-  specs:
-    dnsimple-ruby (0.9.1)
-      httparty
-      httparty
-
 GEM
   remote: http://rubygems.org/
   specs:
     crack (0.1.8)
+    diff-lcs (1.1.2)
+    dnsimple-ruby (0.9.9)
+      httparty
+      httparty
     httparty (0.7.8)
       crack (= 0.1.8)
     polyglot (0.3.2)
+    rspec (2.6.0)
+      rspec-core (~> 2.6.0)
+      rspec-expectations (~> 2.6.0)
+      rspec-mocks (~> 2.6.0)
+    rspec-core (2.6.4)
+    rspec-expectations (2.6.0)
+      diff-lcs (~> 1.1.2)
+    rspec-mocks (2.6.0)
     treetop (1.4.10)
       polyglot
       polyglot (>= 0.3.1)
@@ -28,6 +32,7 @@ PLATFORMS
 
 DEPENDENCIES
   dns-zonefile!
-  dnsimple-ruby!
+  dnsimple-ruby
   polyglot
+  rspec
   treetop
